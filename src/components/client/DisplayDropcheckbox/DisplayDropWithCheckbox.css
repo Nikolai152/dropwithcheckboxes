@@ -1,0 +1,100 @@
+html {
+  font-weight: 400;
+  font-size: 13px;
+  font-family: Inter;
+
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: normal;
+  background: var(--surface-ground);
+  color: var(--text-color);
+  padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: lightslategray;
+}
+
+.card {
+  background: var(--surface-card);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  width: 300px;
+}
+
+.pi.pi-fw {
+  display: none;
+}
+
+.p-treeselect-header {
+  height: 30px;
+  padding-right: 8px;
+}
+
+.p-treeselect-items-wrapper {
+  height: 208px;
+  width: 270px;
+  padding: 8px;
+  margin-right: 10px;
+
+  overflow-x: hidden;
+}
+
+.p-treeselect-items-wrapper::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+.p-treeselect-items-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.p-treeselect-items-wrapper::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 5px;
+}
+
+.p-tree {
+  padding: 0px;
+  width: 264px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content {
+  padding: 4px 10px 4px 4px;
+  height: 32px;
+}
+
+.p-checkbox-box {
+    width: 18px;
+    height: 18px;
+}
+
+.p-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-tree-toggler {
+    margin-right: 4.5px
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon.p-icon {
+    width: 10px;
+    height: 8px;
+  }
+
+.p-treeselect {
+  overflow-y: auto; 
+}
+
+.p-treeselect .p-treeselect-panel {
+  max-height: inherit;
+}
+
+.md\:w-20rem {
+  width: 280px !important; 
+}
