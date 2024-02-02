@@ -1,49 +1,48 @@
-import React, { useEffect, useRef } from "react";
-import { TreeSelect, TreeSelectChangeEvent } from "primereact/treeselect";
-import { DisplayDropWithCheckboxProps } from "../../../types/DropWithCheckbox";
-import "./DisplayDropWithCheckbox.css";
+import React from "react";
+import { PrimeIcons } from "primereact/api";
+import "primeicons/primeicons.css";
+
+import {
+  TreeSelect,
+  TreeSelectChangeEvent,
+  TreeSelectCheckboxSelectionKeyType,
+  TreeSelectSelectionKeysType,
+} from "primereact/treeselect";
+import { TreeNode } from "primereact/treenode";
+import styles from "./DisplayDropWithCheckbox.module.scss";
+
+interface DisplayDropWithCheckboxProps {
+  options: TreeNode[];
+  selectedNodeKeys: TreeSelectCheckboxSelectionKeyType | null;
+  handleTreeSelectChange: (e: TreeSelectChangeEvent) => void;
+  onClearIconClick: () => void;
+}
 
 export default function DisplayDropWithCheckbox({
-  nodes,
+  options,
   selectedNodeKeys,
-  setSelectedNodeKeys,
+  handleTreeSelectChange,
+  onClearIconClick,
 }: DisplayDropWithCheckboxProps) {
-  const treeSelectRef = useRef(null);
-
-  useEffect(() => {
-    const closeButton = document.querySelector(".p-treeselect-close");
-    if (closeButton) {
-      closeButton.addEventListener("click", handleButtonClick);
-    }
-
-    return () => {
-      if (closeButton) {
-        closeButton.removeEventListener("click", handleButtonClick);
-      }
-    };
-  });
-
-  const handleButtonClick = () => {
-    setSelectedNodeKeys("");
-  };
-
   return (
-    <div className="card flex justify-content-center">
-      {nodes && (
+    <div className={styles.card}>
+      {options && (
         <TreeSelect
-          ref={treeSelectRef}
-          value={selectedNodeKeys}
-          onChange={(e: TreeSelectChangeEvent) => {
-            if (e.value !== undefined && e.value !== selectedNodeKeys) {
-              setSelectedNodeKeys(e.value as string | null);
-            }
-          }}
-          options={nodes}
+          panelClassName={styles.dropdown}
+          value={selectedNodeKeys as TreeSelectSelectionKeysType}
+          onChange={handleTreeSelectChange}
+          options={options}
           metaKeySelection={false}
-          className="md:w-20rem w-full"
+          className={styles.input}
           selectionMode="checkbox"
           display="chip"
           placeholder="Найти"
+          closeIcon={
+            <i
+              className={`pi ${PrimeIcons.TIMES}`}
+              onClick={onClearIconClick}
+            ></i>
+          }
         ></TreeSelect>
       )}
     </div>

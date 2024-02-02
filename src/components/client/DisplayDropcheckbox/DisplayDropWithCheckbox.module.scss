@@ -1,0 +1,81 @@
+.card {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  width: 300px;
+}
+
+.input {
+  width: 280px;
+}
+
+.dropdown {
+  :global(.pi.pi-fw) {
+    display: none;
+  }
+  :global(.p-treeselect-header) {
+    height: 30px;
+    padding-right: 8px;
+  }
+  :global(.p-treeselect-items-wrapper) {
+    height: 208px;
+    width: 270px;
+    padding: 8px;
+    margin-right: 10px;
+    overflow-x: hidden;
+  }
+  :global(.p-treeselect-items-wrapper::-webkit-scrollbar-track-piece) {
+    background: transparent;
+  }
+  :global(.p-treeselect-items-wrapper::-webkit-scrollbar) {
+    width: 4px;
+  }
+  :global(.p-treeselect-items-wrapper::-webkit-scrollbar-thumb) {
+    background: #c7c7c7;
+    border-radius: 5px;
+  }
+
+  :global(.p-tree-container) {
+    overflow: hidden;
+  }
+
+  :global(.p-tree) {
+    padding: 0px;
+    width: 264px;
+  }
+  :global(.p-tree .p-tree-container .p-treenode .p-treenode-content) {
+    padding: 4px 10px 4px 4px;
+    height: 32px;
+  }
+  :global(.p-checkbox-box) {
+    width: 18px;
+    height: 18px;
+  }
+  :global(.p-checkbox) {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    margin-right: 14px;
+  }
+
+  :global(.p-checkbox .p-checkbox-box .p-checkbox-icon.p-icon) {
+    width: 10px;
+    height: 8px;
+  }
+  :global(.p-checkbox-box.p-highlight.p-indeterminate > svg) {
+    color: white;
+  }
+  :global(.p-treeselect) {
+    overflow-y: auto;
+  }
+  :global(.p-treeselect .p-treeselect-panel) {
+    max-height: inherit;
+  }
+  :global(.p-icon) {
+    width: 0.5rem;
+  }
+  :global(.p-tree-toggler) {
+    color: black;
+  }
+}

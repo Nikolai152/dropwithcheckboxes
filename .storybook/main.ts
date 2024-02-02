@@ -18,7 +18,8 @@ const config: StorybookConfig = {
     },
   },
   docs: {
-    autodocs: "tag",
+    // autodocs: "tag",
+    autodocs: true,
   },
   staticDirs: ["../public"],
 };
