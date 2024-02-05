@@ -26,7 +26,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --max-warnings=0 --fix",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -57,7 +60,18 @@
     "@storybook/react": "^7.6.7",
     "@storybook/react-webpack5": "^7.6.7",
     "@storybook/test": "^7.6.7",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-compat": "^4.1.4",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-unicorn": "^47.0.0",
+    "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.7",
     "webpack": "^5.89.0"

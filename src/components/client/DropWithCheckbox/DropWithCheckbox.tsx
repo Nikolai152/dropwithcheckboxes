@@ -1,10 +1,11 @@
-import { FC, useMemo } from "react";
-import DisplayDropWithCheckbox from "../DisplayDropcheckbox/DisplayDropWithCheckbox";
-import { TreeNode } from "primereact/treenode";
+import { TreeNode } from 'primereact/treenode';
 import {
   TreeSelectChangeEvent,
   TreeSelectSelectionKeysType,
-} from "primereact/treeselect";
+} from 'primereact/treeselect';
+import { FC, useMemo } from 'react';
+
+import DisplayDropWithCheckbox from '../DisplayDropcheckbox/DisplayDropWithCheckbox';
 
 export interface DropWithCheckboxProps {
   value: string[];
@@ -12,53 +13,54 @@ export interface DropWithCheckboxProps {
   options: TreeNode[];
 }
 
-const DropWithCheckbox: FC<DropWithCheckboxProps> = (props) => {
+const DropWithCheckbox: FC<DropWithCheckboxProps> = props => {
   const { value, onValueChange, options } = props;
+
   const selectedNodes = useMemo<TreeSelectSelectionKeysType>(() => {
     const treeKeys: TreeSelectSelectionKeysType = {};
 
-    options.forEach((road) => {
-      if (typeof road.key !== "string" || !road.key) {
+    options.forEach(road => {
+      if (!road.key) {
         return;
       }
 
       let selectedRegionsCount = 0;
-      let isAddPartialCheckedForRoad = false;//
+      let isAddPartialCheckedForRoad = false;
 
-      road.children?.forEach((region) => {
-        if (typeof region.key !== "string" || !region.key) {
+      road.children?.forEach(region => {
+        if (!region.key) {
           return;
         }
 
         let selectedStationsCount = 0;
 
-        region.children?.forEach((station) => {
-          if (typeof station.key !== "string" || !station.key) {
+        region.children?.forEach(station => {
+          if (!station.key) {
             return;
           }
 
-          const isChecked = value.includes(station.key);
+          const isChecked = value.includes(station.key as string);
 
           if (isChecked) {
             treeKeys[station.key] = {
               checked: isChecked,
               partialChecked: false,
             };
-            isAddPartialCheckedForRoad = true;//
-            selectedStationsCount++;
+            isAddPartialCheckedForRoad = true;
+            selectedStationsCount += 1;
           }
         });
 
         if (region.children?.length === selectedStationsCount) {
           treeKeys[region.key] = {
             checked: true,
-            partialChecked: true,
+            partialChecked: false,
           };
 
-          selectedRegionsCount++;
+          selectedRegionsCount += 1;
         } else if (selectedStationsCount > 0) {
           treeKeys[region.key] = {
-            checked: value.includes(region.key),
+            checked: false,
             partialChecked: true,
           };
         }
@@ -67,48 +69,42 @@ const DropWithCheckbox: FC<DropWithCheckboxProps> = (props) => {
       if (road.children?.length === selectedRegionsCount) {
         treeKeys[road.key] = {
           checked: true,
-          partialChecked: true,       
+          partialChecked: false,
         };
       } else if (isAddPartialCheckedForRoad) {
         treeKeys[road.key] = {
-          checked: value.includes(road.key),
-          partialChecked: true,       
+          checked: false,
+          partialChecked: true,
         };
       }
     });
 
     return treeKeys;
-  }, [value]); 
+  }, [value, options]);
 
   const handleTreeSelectChange = (e: TreeSelectChangeEvent) => {
-    console.log(e, "event");
     e.stopPropagation();
     const treeSelectValue = e.value as TreeSelectSelectionKeysType;
-    console.log(treeSelectValue, "treeSelectValue"); 
 
-    const selectedIds = options.flatMap(
-      (road) =>
-        road.children?.flatMap(
-          (region) =>
-            region.children?.reduce((acc: string[], station) => {
-              const stationKey = station.key;
-              if (
-                typeof stationKey === "string" &&
-                treeSelectValue[stationKey]
-              ) {
-                acc.push(stationKey);
-              }
-              return acc;
-            }, []) || []
-        ) || []
-    );
+    const selectedIds = options.flatMap(road =>
+      (road.children || []).flatMap(region =>
+        (region.children || [])
+          .filter(station => {
+            const stationKey = station.key;
 
-    console.log(selectedIds, "selectedIds");
+            return (
+              typeof stationKey === 'string' && treeSelectValue[stationKey]
+            );
+          })
+          .map(station => station.key),
+      ),
+    ) as string[];
+    // ).filter(id => id !== undefined);
 
     onValueChange(selectedIds);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClear = () => {
     onValueChange([]);
   };
 
@@ -117,7 +113,7 @@ const DropWithCheckbox: FC<DropWithCheckboxProps> = (props) => {
       options={options}
       selectedNodeKeys={selectedNodes}
       handleTreeSelectChange={handleTreeSelectChange}
-      onClearIconClick={handleButtonClick}
+      handleButtonClear={handleButtonClear}
     />
   );
 };

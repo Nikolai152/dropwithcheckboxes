@@ -1,28 +1,28 @@
-import React from "react";
-import { PrimeIcons } from "primereact/api";
-import "primeicons/primeicons.css";
+import 'primeicons/primeicons.css';
 
+import { PrimeIcons } from 'primereact/api';
+import { TreeNode } from 'primereact/treenode';
 import {
   TreeSelect,
   TreeSelectChangeEvent,
   TreeSelectCheckboxSelectionKeyType,
   TreeSelectSelectionKeysType,
-} from "primereact/treeselect";
-import { TreeNode } from "primereact/treenode";
-import styles from "./DisplayDropWithCheckbox.module.scss";
+} from 'primereact/treeselect';
+
+import styles from './DisplayDropWithCheckbox.module.scss';
 
 interface DisplayDropWithCheckboxProps {
   options: TreeNode[];
   selectedNodeKeys: TreeSelectCheckboxSelectionKeyType | null;
   handleTreeSelectChange: (e: TreeSelectChangeEvent) => void;
-  onClearIconClick: () => void;
+  handleButtonClear: () => void;
 }
 
 export default function DisplayDropWithCheckbox({
   options,
   selectedNodeKeys,
   handleTreeSelectChange,
-  onClearIconClick,
+  handleButtonClear,
 }: DisplayDropWithCheckboxProps) {
   return (
     <div className={styles.card}>
@@ -40,7 +40,7 @@ export default function DisplayDropWithCheckbox({
           closeIcon={
             <i
               className={`pi ${PrimeIcons.TIMES}`}
-              onClick={onClearIconClick}
+              onClick={handleButtonClear}
             ></i>
           }
         ></TreeSelect>
